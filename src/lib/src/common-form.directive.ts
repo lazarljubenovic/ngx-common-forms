@@ -102,7 +102,21 @@ export class CommonFormDirective implements OnInit, CommonFormConfig {
   }
 
   ngOnInit() {
-    Object.assign(this, this.config)
+    if (this.propagateErrors == null) {
+      this.propagateErrors = this.config.propagateErrors
+    }
+
+    if (this.transform == null) {
+      this.transform = this.config.transform
+    }
+
+    if (this.transformError == null) {
+      this.transformError = this.config.transformError
+    }
+
+    if (this.request == null) {
+      this.request = this.config.request
+    }
 
     this.container.ngSubmit
       .do((event: Event) => event.preventDefault())
@@ -115,8 +129,7 @@ export class CommonFormDirective implements OnInit, CommonFormConfig {
           return false
         }
       })
-      .map(form => form.value)
-      .map(value => this.transform(value))
+      .map(form => this.transform(form.value))
       .do(() => this.isLoading.emit(true))
       .exhaustMap(value => this.request(value)
         .catch((err: HttpErrorResponse, caught) => {
@@ -129,6 +142,11 @@ export class CommonFormDirective implements OnInit, CommonFormConfig {
         })
         .finally(() => this.isLoading.emit(false)),
       )
+      .finally(() => this.isLoading.emit(false))
+      .catch((err, caught) => {
+        console.error(`Error while handling form submission inside Common Form`, err)
+        return caught
+      })
       .subscribe(response => {
         this.ngxSubmit.emit(Observable.of(response))
       })
