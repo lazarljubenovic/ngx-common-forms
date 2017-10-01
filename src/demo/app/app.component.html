@@ -1,0 +1,38 @@
+<form [formGroup]="form"
+      [ngxCommonForm]="api.login.bind(api)"
+      [transform]="transform"
+      (ngxSubmit)="onSubmit($event)"
+>
+
+  <div>
+    <label>
+      <span>Email</span>
+      <input type="email" formControlName="email">
+    </label>
+    <div>
+      <!-- Display errors. Check out ngx-sin for less boilerplate -->
+      <span *ngIf="form.get('email').dirty && form.get('email').touched && form.get('email').errors?.required">Email is required.</span>
+      <span *ngIf="form.get('email').dirty && form.get('email').touched && form.get('email').errors?.serverError">{{ form.get('email').errors.serverError }}</span>
+    </div>
+  </div>
+
+  <br>
+
+  <div>
+    <label>
+      <span>Password</span>
+      <input type="password" formControlName="password">
+    </label>
+    <div>
+      <!-- Display errors. Check out ngx-sin for less boilerplate -->
+      <span *ngIf="form.get('password').dirty && form.get('password').touched && form.get('password').errors?.required">Password is required.</span>
+      <span *ngIf="form.get('password').dirty && form.get('password').touched && form.get('password').errors?.minlength">Password must be longer than 4 characters.</span>
+      <span *ngIf="form.get('password').dirty && form.get('password').touched && form.get('password').errors?.serverError">{{ form.get('password').errors.serverError }}</span>
+    </div>
+  </div>
+
+  <br>
+
+  <button type="submit">Log in</button>
+
+</form>
