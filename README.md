@@ -4,7 +4,7 @@
 
 ## Highlighted features
 
-- Attempts to submit invalid form will mark all controls as dirty and touched automatically, thus triggering **displaying errors based on Angular validators**. Works good with `ngx-sin`.
+- Attempts to submit invalid form will mark all controls as dirty and touched automatically, thus triggering **displaying errors based on Angular validators**. Works good with [`ngx-sin`](https://github.com/lazarljubenovic/ngx-sin).
 - If the **server returns a response with errors**, it will automatically insert those errors into validators and mark those controls as dirty and touched.
 - Exposes a **loading observable** so you can call your loading bar or display spinner in the button.
 - Pass the **API call** function your service as an **input** to the directive.
@@ -148,7 +148,7 @@ An example of flat errors is the following object.
 }
 ```
 
-It's up to you how will you _display_ these errors and will you display all of them, some of them or none. Check out `ngx-sin` for some util directives regarding this.
+It's up to you how will you _display_ these errors and will you display all of them, some of them or none. [Check out `ngx-sin`](https://github.com/lazarljubenovic/ngx-sin) for some util directives regarding this.
 
 #### Propagate errors
 
