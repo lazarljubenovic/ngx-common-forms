@@ -101,12 +101,14 @@ export interface FlatServerErrors {
 }
 
 export type CommonFormTransform = (formValue: any) => any;
+export type CommonFormIsValidationError = (response: HttpErrorResponse) => boolean
 export type CommonFormTransformError = (formValue: any) => FlatServerErrors;
 export type CommonFormRequest<T = any> = (formValue: T) => Observable<T>;
 
 export interface CommonFormConfigObject {
   propagateErrors?: boolean;
   transform?: CommonFormTransform;
+  isValidationError?: CommonFormIsValidationError;
   transformError?: CommonFormTransformError;
   request?: CommonFormRequest;
 }
@@ -118,6 +120,7 @@ The default configuration object is given below.
 export const DEFAULT_CONFIG: CommonFormConfig = {
   propagateErrors: false,
   transform: x => x,
+  isValidationError: response => response.status == 422,
   transformError: x => x,
   request: x => Observable.of(x),
 };
@@ -133,6 +136,10 @@ The `request` option doesn't make much sense to be configured globally. For prov
 #### Transform
 
 Use `transform` to transform form's value before feeding it to the `request` function.
+
+#### Is validation error
+
+Use `isValidationError` to pass in a predicate used to determine if the error which occured during the request is supposed to be queried for validation errors inside. By default this checks for the `422` status in HTTP response.
  
 #### Transform error
 

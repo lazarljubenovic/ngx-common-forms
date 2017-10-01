@@ -15,6 +15,7 @@ import {Subject} from 'rxjs/Subject'
 import {HttpErrorResponse} from '@angular/common/http'
 import {
   CommonFormConfig,
+  CommonFormIsValidationError,
   CommonFormRequest,
   CommonFormTransform,
   CommonFormTransformError,
@@ -77,6 +78,12 @@ export class CommonFormDirective implements OnInit, CommonFormConfig {
   @Input() public transform: CommonFormTransform
 
   /**
+   * A predicate to determine if the error is supposed to be treated as a validation
+   * error from backend response.
+   */
+  @Input() public isValidationError: CommonFormIsValidationError
+
+  /**
    * A function to transform errors. The result should be flattened errors string.
    */
   @Input() public transformError: CommonFormTransformError
@@ -110,6 +117,10 @@ export class CommonFormDirective implements OnInit, CommonFormConfig {
       this.transform = this.config.transform
     }
 
+    if (this.isValidationError == null) {
+      this.isValidationError = this.config.isValidationError
+    }
+
     if (this.transformError == null) {
       this.transformError = this.config.transformError
     }
@@ -132,11 +143,13 @@ export class CommonFormDirective implements OnInit, CommonFormConfig {
       .map(form => this.transform(form.value))
       .do(() => this.isLoading.emit(true))
       .exhaustMap(value => this.request(value)
-        .catch((err: HttpErrorResponse, caught) => {
-          const flatErrors = this.transformError(err)
-          this.setErrors(flatErrors)
+        .catch((httpErrorResponse: HttpErrorResponse) => {
+          if (this.isValidationError(httpErrorResponse)) {
+            const flatErrors = this.transformError(httpErrorResponse)
+            this.setErrors(flatErrors)
+          }
           if (this.propagateErrors) {
-            this.ngxSubmit.emit(Observable.throw(err))
+            this.ngxSubmit.emit(Observable.throw(httpErrorResponse))
           }
           return Observable.empty()
         })
