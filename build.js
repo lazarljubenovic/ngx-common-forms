@@ -68,17 +68,37 @@ return Promise.resolve()
         // the window object.
         // See https://github.com/rollup/rollup/wiki/JavaScript-API#globals for more.
         '@angular/core': 'ng.core',
+        '@angular/common': 'ng.common',
         '@angular/forms': 'ng.forms',
         'rxjs/Observable': 'Rx',
         'rxjs/Subject': 'Rx',
+        'rxjs/add/observable/of': 'Rx.Observable',
+        'rxjs/add/observable/throw': 'Rx.Observable',
+        'rxjs/add/observable/empty': 'Rx.Observable',
+        'rxjs/add/operator/map': 'Rx.Observable.prototype',
+        'rxjs/add/operator/filter': 'Rx.Observable.prototype',
+        'rxjs/add/operator/do': 'Rx.Observable.prototype',
+        'rxjs/add/operator/exhaustMap': 'Rx.Observable.prototype',
+        'rxjs/add/operator/catch': 'Rx.Observable.prototype',
+        'rxjs/add/operator/finally': 'Rx.Observable.prototype',
       },
       external: [
         // List of dependencies
         // See https://github.com/rollup/rollup/wiki/JavaScript-API#external for more.
         '@angular/core',
         '@angular/forms',
+        '@angular/common',
         'rxjs/Observable',
         'rxjs/Subject',
+        'rxjs/add/observable/of',
+        'rxjs/add/observable/throw',
+        'rxjs/add/observable/empty',
+        'rxjs/add/operator/map',
+        'rxjs/add/operator/filter',
+        'rxjs/add/operator/do',
+        'rxjs/add/operator/exhaustMap',
+        'rxjs/add/operator/catch',
+        'rxjs/add/operator/finally',
       ],
       plugins: [
         commonjs({
