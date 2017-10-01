@@ -16,6 +16,7 @@
       // angular bundles
       '@angular/core': 'npm:@angular/core/bundles/core.umd.js',
       '@angular/common': 'npm:@angular/common/bundles/common.umd.js',
+      '@angular/common/http': 'npm:@angular/common/bundles/common-http.umd.js',
       '@angular/compiler': 'npm:@angular/compiler/bundles/compiler.umd.js',
       '@angular/forms': 'npm:@angular/forms/bundles/forms.umd.js',
       '@angular/http': 'npm:@angular/http/bundles/http.umd.js',
@@ -30,6 +31,7 @@
 
       // other libraries
       'rxjs': 'npm:rxjs',
+      'tslib': 'npm:tslib/tslib.js', // for http client
     },
     // packages tells the System loader how to load when no filename and/or no extension
     packages: {
