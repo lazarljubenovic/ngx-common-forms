@@ -10,14 +10,6 @@ export type CommonFormIsValidationError = (response: HttpErrorResponse) => boole
 export type CommonFormTransformError = (formValue: any) => FlatServerErrors;
 export type CommonFormRequest<T = any> = (formValue: T) => Observable<T>;
 
-export interface CommonFormConfigObject {
-  propagateErrors?: boolean;
-  transform?: CommonFormTransform;
-  isValidationError?: CommonFormIsValidationError;
-  transformError?: CommonFormTransformError;
-  request?: CommonFormRequest;
-}
-
 export interface CommonFormConfig {
   propagateErrors: boolean;
   transform: CommonFormTransform;
@@ -25,3 +17,5 @@ export interface CommonFormConfig {
   transformError: CommonFormTransformError;
   request: CommonFormRequest;
 }
+
+export type CommonFormConfigObject = Partial<CommonFormConfig>
