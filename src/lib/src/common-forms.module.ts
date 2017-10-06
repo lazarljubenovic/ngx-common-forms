@@ -24,14 +24,13 @@ export function request<T = any>(formValue: T): Observable<T> {
 }
 
 export function commonConfigFactory(partialCommonFormConfig: Partial<CommonFormConfig>) {
-  return {
+  return Object.assign({
     propagateErrors: false,
     transform,
     isValidationError,
     transformError,
     request,
-    ...(partialCommonFormConfig || {})
-  }
+  }, (partialCommonFormConfig || {}))
 }
 
 @NgModule({
