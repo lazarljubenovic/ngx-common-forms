@@ -2,16 +2,37 @@ import {ModuleWithProviders, NgModule} from '@angular/core'
 import {CommonModule} from '@angular/common'
 import {CommonFormDirective} from './common-form.directive'
 import {Observable} from 'rxjs/Observable'
-import {COMMON_FORM_CONFIG} from './config'
+import {COMMON_FORM_CONFIG, COMMON_FORM_FULL_CONFIG} from './config'
 import {FormControlNameDirective} from './form-control-name.directive'
-import {CommonFormConfig, CommonFormConfigObject} from './interfaces'
+import {CommonFormConfig, FlatServerErrors} from './interfaces'
+import {HttpErrorResponse} from '@angular/common/http'
 
-export const DEFAULT_CONFIG: CommonFormConfig = {
+export function transform(formValue: any): any {
+  return formValue
+}
+
+export function isValidationError(response: HttpErrorResponse): boolean {
+  return response.status == 422
+}
+
+export function transformError(serverError: any): FlatServerErrors {
+  return serverError
+}
+
+export function request<T = any>(formValue: T): Observable<T> {
+  return Observable.of(formValue)
+}
+
+export const defaultConfig: CommonFormConfig = {
   propagateErrors: false,
-  transform: x => x,
-  isValidationError: response => response.status == 422,
-  transformError: x => x,
-  request: x => Observable.of(x),
+  transform,
+  isValidationError,
+  transformError,
+  request,
+}
+
+export function commonConfigFactory(partialCommonFormConfig: Partial<CommonFormConfig>) {
+  return {...defaultConfig, ...(partialCommonFormConfig || {})}
 }
 
 @NgModule({
@@ -28,13 +49,18 @@ export const DEFAULT_CONFIG: CommonFormConfig = {
   ],
 })
 export class CommonFormsModule {
-  public static forRoot(config?: CommonFormConfigObject): ModuleWithProviders {
+  public static forRoot(config?: Partial<CommonFormConfig>): ModuleWithProviders {
     return {
       ngModule: CommonFormsModule,
       providers: [
         {
           provide: COMMON_FORM_CONFIG,
-          useValue: {...DEFAULT_CONFIG, ...(config || {})},
+          useValue: config,
+        },
+        {
+          provide: COMMON_FORM_FULL_CONFIG,
+          useFactory: commonConfigFactory,
+          deps: [COMMON_FORM_CONFIG],
         },
       ],
     }

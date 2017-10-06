@@ -17,5 +17,3 @@ export interface CommonFormConfig {
   transformError: CommonFormTransformError;
   request: CommonFormRequest;
 }
-
-export type CommonFormConfigObject = Partial<CommonFormConfig>
