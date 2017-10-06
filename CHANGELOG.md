@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.1.3"></a>
+## [0.1.3](https://github.com/lazarljubenovic/ngx-common-forms/compare/v0.1.2...v0.1.3) (2017-10-06)
+
+
+### Bug Fixes
+
+* use object.assign instead of spread ([534ca97](https://github.com/lazarljubenovic/ngx-common-forms/commit/534ca97))
+
+
+
 <a name="0.1.2"></a>
 ## [0.1.2](https://github.com/lazarljubenovic/ngx-common-forms/compare/v0.1.1...v0.1.2) (2017-10-06)
 
