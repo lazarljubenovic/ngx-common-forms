@@ -23,16 +23,15 @@ export function request<T = any>(formValue: T): Observable<T> {
   return Observable.of(formValue)
 }
 
-export const defaultConfig: CommonFormConfig = {
-  propagateErrors: false,
-  transform,
-  isValidationError,
-  transformError,
-  request,
-}
-
 export function commonConfigFactory(partialCommonFormConfig: Partial<CommonFormConfig>) {
-  return {...defaultConfig, ...(partialCommonFormConfig || {})}
+  return {
+    propagateErrors: false,
+    transform,
+    isValidationError,
+    transformError,
+    request,
+    ...(partialCommonFormConfig || {})
+  }
 }
 
 @NgModule({
