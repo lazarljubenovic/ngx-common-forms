@@ -23,7 +23,7 @@ export function request<T = any>(formValue: T): Observable<T> {
   return Observable.of(formValue)
 }
 
-export function commonConfigFactory(partialCommonFormConfig: Partial<CommonFormConfig>) {
+export function commonConfigFactory(partialCommonFormConfig?: Partial<CommonFormConfig>) {
   return Object.assign({
     propagateErrors: false,
     transform,

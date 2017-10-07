@@ -21,7 +21,7 @@ import {
   CommonFormTransformError,
   FlatServerErrors,
 } from './interfaces'
-import {COMMON_FORM_CONFIG} from './config'
+import {COMMON_FORM_CONFIG, COMMON_FORM_FULL_CONFIG} from './config'
 
 export function markControlsAsDirtyAndTouched(form: FormGroup, controlNames: string[]) {
   controlNames.forEach(controlName => {
@@ -105,7 +105,7 @@ export class CommonFormDirective implements OnInit, CommonFormConfig {
   }
 
   constructor(@Self() private container: FormGroupDirective,
-              @Inject(COMMON_FORM_CONFIG) private config: CommonFormConfig) {
+              @Inject(COMMON_FORM_FULL_CONFIG) private config: CommonFormConfig) {
   }
 
   ngOnInit() {
