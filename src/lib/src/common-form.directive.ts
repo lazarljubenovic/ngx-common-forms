@@ -171,7 +171,7 @@ export class CommonFormDirective implements OnInit, CommonFormConfig {
       const control = form.get(path)
       if (control == null) {
         console.error(
-          `API claims that a field with path ${path} is, ` +
+          `API claims that a field with path ${path} is invalid, ` +
           `but no such field was found on the form.`,
         )
       } else {
