@@ -42,7 +42,7 @@ describe('CommonFormDirective', () => {
         <div>
           <label>
             <span>Userame</span>
-            <input type="text" formControlName="username">
+            <input type="text" [formControl]="form.get('username')" name="username">
           </label>
         </div>
         <div>
@@ -55,11 +55,11 @@ describe('CommonFormDirective', () => {
           <fieldset>
             <legend>Receive newsletter?</legend>
             <label>
-              <input type="checkbox" formControlName="newsletter" [value]="true">
+              <input type="radio" formControlName="newsletter" [value]="true">
               <span>Yes</span>
             </label>
             <label>
-              <input type="checkbox" formControlName="newsletter" [value]="true">
+              <input type="radio" formControlName="newsletter" [value]="false">
               <span>No</span>
             </label>
           </fieldset>
@@ -283,7 +283,7 @@ describe('CommonFormDirective', () => {
       expect($('[name=email]')).toBeNull() // not in DOM
     })
 
-    xit(`should not mark field not in DOM when submit was pressed as touched or dirty`, async () => {
+    it(`should not mark field not in DOM when submit was pressed as touched or dirty`, async () => {
       submit()
       fixture.detectChanges()
       await fixture.whenStable()

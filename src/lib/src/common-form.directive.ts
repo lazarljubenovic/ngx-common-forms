@@ -1,7 +1,7 @@
-import {Directive, EventEmitter, Inject, Input, OnInit, Output, Self} from '@angular/core'
+// tslint:disable:max-line-length
+import {ContentChildren, Directive, EventEmitter, Inject, Input, OnInit, Output, QueryList, Self} from '@angular/core'
 import {Observable} from 'rxjs/Observable'
-import {FormGroup, FormGroupDirective} from '@angular/forms'
-
+import {AbstractControl, FormGroup, FormGroupDirective, NgControl} from '@angular/forms'
 import 'rxjs/add/observable/of'
 import 'rxjs/add/observable/throw'
 import 'rxjs/add/operator/map'
@@ -13,17 +13,18 @@ import 'rxjs/add/operator/finally'
 import 'rxjs/add/observable/empty'
 import {Subject} from 'rxjs/Subject'
 import {HttpErrorResponse} from '@angular/common/http'
-import {
-  CommonFormConfig,
-  CommonFormIsValidationError,
-  CommonFormRequest,
-  CommonFormTransform,
-  CommonFormTransformError,
-  FlatServerErrors,
-} from './interfaces'
-import {COMMON_FORM_CONFIG, COMMON_FORM_FULL_CONFIG} from './config'
+import {CommonFormConfig, CommonFormIsValidationError, CommonFormRequest, CommonFormTransform, CommonFormTransformError, FlatServerErrors} from './interfaces'
+import {COMMON_FORM_FULL_CONFIG} from './config'
+// tslint:enable:max-line-length
 
-export function markControlsAsDirtyAndTouched(form: FormGroup, controlNames: string[]) {
+export function markControlsAsDirtyAndTouched(controls: AbstractControl[]) {
+  controls.forEach(control => {
+    control.markAsDirty()
+    control.markAsTouched()
+  })
+}
+
+export function markControlsAsDirtyAndTouchedByPath(form: FormGroup, controlNames: string[]) {
   controlNames.forEach(controlName => {
     const control = form.get(controlName)
     if (control != null) {
@@ -104,6 +105,9 @@ export class CommonFormDirective implements OnInit, CommonFormConfig {
     this.request = request
   }
 
+  @ContentChildren(NgControl)
+  public ngControls: QueryList<NgControl>
+
   constructor(@Self() private container: FormGroupDirective,
               @Inject(COMMON_FORM_FULL_CONFIG) private config: CommonFormConfig) {
   }
@@ -136,7 +140,7 @@ export class CommonFormDirective implements OnInit, CommonFormConfig {
         if (form.valid) {
           return true
         } else {
-          markAllControlsAsDirtyAndTouched(form)
+          markControlsAsDirtyAndTouched(this.ngControls.toArray().map(ngCtrl => ngCtrl.control))
           return false
         }
       })
@@ -175,7 +179,7 @@ export class CommonFormDirective implements OnInit, CommonFormConfig {
           `but no such field was found on the form.`,
         )
       } else {
-        markControlsAsDirtyAndTouched(form, [path])
+        markControlsAsDirtyAndTouchedByPath(form, [path])
         form.get(path).setErrors({serverError: errors[path]})
       }
     })
