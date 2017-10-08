@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.1.5"></a>
+## [0.1.5](https://github.com/lazarljubenovic/ngx-common-forms/compare/v0.1.4...v0.1.5) (2017-10-08)
+
+
+### Bug Fixes
+
+* mark only controls in dom as dirty and touched ([bea7038](https://github.com/lazarljubenovic/ngx-common-forms/commit/bea7038))
+
+
+
 <a name="0.1.4"></a>
 ## [0.1.4](https://github.com/lazarljubenovic/ngx-common-forms/compare/v0.1.3...v0.1.4) (2017-10-07)
 
