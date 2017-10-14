@@ -144,7 +144,9 @@ export class CommonFormDirective implements OnInit, CommonFormConfig {
             const controlsWithErrors = this.setErrors(flatErrors)
             const firstInvalidControl = this.controls
               .find(ctrl => controlsWithErrors.indexOf(ctrl.ngControl.control) > -1)
-            firstInvalidControl.commonFormControl.focus()
+            if (firstInvalidControl != null) {
+              firstInvalidControl.commonFormControl.focus()
+            }
           }
           if (this.propagateErrors) {
             this.ngxSubmit.emit(Observable.throw(httpErrorResponse))
