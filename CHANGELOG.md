@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+<a name="0.2.4"></a>
+## [0.2.4](https://github.com/lazarljubenovic/ngx-common-forms/compare/v0.2.3...v0.2.4) (2017-10-14)
+
+
+### Bug Fixes
+
+* make it work with aot ([bbf2c0e](https://github.com/lazarljubenovic/ngx-common-forms/commit/bbf2c0e))
+
+
+
 <a name="0.2.3"></a>
 ## [0.2.3](https://github.com/lazarljubenovic/ngx-common-forms/compare/v0.2.2...v0.2.3) (2017-10-14)
 
