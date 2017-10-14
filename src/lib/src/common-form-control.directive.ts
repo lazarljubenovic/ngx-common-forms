@@ -9,7 +9,7 @@ function isEmpty(string: string): boolean {
   return string == null || string == ''
 }
 
-function providerFactory(klass: any) {
+export function providerFactory(klass: any) {
   return {
     provide: COMMON_FORM_CONTROL,
     useExisting: forwardRef(() => klass),
