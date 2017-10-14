@@ -1,6 +1,6 @@
 {
   "name": "ngx-common-forms",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A util Angular module for handling most common use-cases for forms.",
   "main": "./bundles/ngx-common-forms.umd.js",
   "module": "./ngx-common-forms.es5.js",
