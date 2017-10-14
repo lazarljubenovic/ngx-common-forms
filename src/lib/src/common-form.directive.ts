@@ -131,7 +131,9 @@ export class CommonFormDirective implements OnInit, CommonFormConfig {
           const abstractControls = this.controls.map(ctrl => ctrl.ngControl.control)
           markControlsAsDirtyAndTouched(abstractControls)
           const firstInvalidControl = this.controls.find(ctrl => ctrl.ngControl.invalid)
-          firstInvalidControl.commonFormControl.focus()
+          if (firstInvalidControl != null) {
+            firstInvalidControl.commonFormControl.focus()
+          }
           return false
         }
       })
