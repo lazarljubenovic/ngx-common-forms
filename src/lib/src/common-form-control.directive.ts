@@ -17,9 +17,8 @@ function providerFactory(klass: any) {
 }
 
 @Directive({
-  selector: ['input', 'select', 'textarea']
-    .map(selector => `${selector}:not([notCommonControl])`)
-    .join(','),
+  // tslint:disable-next-line:max-line-length
+  selector: 'input:not([notCommonControl]),select:not([notCommonControl]),textarea:not([notCommonControl])',
   providers: [providerFactory(DefaultCommonFormControlDirective)],
 })
 export class DefaultCommonFormControlDirective implements CommonFormControl {
