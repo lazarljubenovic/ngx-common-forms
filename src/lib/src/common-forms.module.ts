@@ -3,7 +3,7 @@ import {CommonModule} from '@angular/common'
 import {CommonFormDirective} from './common-form.directive'
 import {Observable} from 'rxjs/Observable'
 import {COMMON_FORM_CONFIG, COMMON_FORM_FULL_CONFIG} from './config'
-import {FormControlNameDirective} from './form-control-name.directive'
+import {CommonFormControlDirective, DefaultCommonFormControlDirective} from './common-form-control.directive'
 import {CommonFormConfig, FlatServerErrors} from './interfaces'
 import {HttpErrorResponse} from '@angular/common/http'
 
@@ -39,11 +39,13 @@ export function commonConfigFactory(partialCommonFormConfig?: Partial<CommonForm
   ],
   declarations: [
     CommonFormDirective,
-    FormControlNameDirective,
+    CommonFormControlDirective,
+    DefaultCommonFormControlDirective,
   ],
   exports: [
     CommonFormDirective,
-    FormControlNameDirective,
+    CommonFormControlDirective,
+    DefaultCommonFormControlDirective,
   ],
 })
 export class CommonFormsModule {

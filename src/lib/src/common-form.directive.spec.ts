@@ -1,7 +1,7 @@
 // tslint:disable:max-line-length
 import {CommonFormDirective} from './common-form.directive'
-import {Component, DebugElement} from '@angular/core'
-import {AbstractControl, FormBuilder, ReactiveFormsModule, Validators} from '@angular/forms'
+import {Component, DebugElement, forwardRef, Input} from '@angular/core'
+import {AbstractControl, ControlValueAccessor, FormBuilder, NG_VALUE_ACCESSOR, ReactiveFormsModule, Validators} from '@angular/forms'
 import {ComponentFixture, TestBed} from '@angular/core/testing'
 import {CommonFormsModule} from './common-forms.module'
 import {Observable} from 'rxjs/Observable'
@@ -11,7 +11,9 @@ import 'rxjs/add/operator/delay'
 import 'rxjs/add/observable/never'
 import 'rxjs/add/observable/of'
 import {By} from '@angular/platform-browser'
-import {FlatServerErrors} from './interfaces'
+import {CommonFormControl, FlatServerErrors} from './interfaces'
+import {COMMON_FORM_CONTROL} from './config'
+import {DOCUMENT} from '@angular/common'
 // tslint:enable:max-line-length
 
 function emailValidator(control: AbstractControl) {
@@ -41,7 +43,7 @@ describe('CommonFormDirective', () => {
       >
         <div>
           <label>
-            <span>Userame</span>
+            <span>Username</span>
             <input type="text" [formControl]="form.get('username')" name="username">
           </label>
         </div>
@@ -174,6 +176,8 @@ describe('CommonFormDirective', () => {
   const submit = () => $('button[type=submit]').nativeElement.click()
   const hasClasses = (debugElement: DebugElement, classNames: string[]) =>
     expect(classNames.every(className => debugElement.classes[className])).toBeTruthy()
+  const document = () => fixture.debugElement.injector.get<Document>(DOCUMENT)
+  const hasFocus = (el: DebugElement) => expect(document().activeElement).toEqual(el.nativeElement)
 
   describe(`form submission`, () => {
 
@@ -211,6 +215,7 @@ describe('CommonFormDirective', () => {
       hasClasses($('[name=password]'), ['ng-dirty', 'ng-touched', 'ng-valid'])
       hasClasses($('[name=newsletter]'), ['ng-dirty', 'ng-touched', 'ng-valid'])
       expect(console.error).not.toHaveBeenCalled()
+      hasFocus($('[name=username]'))
     })
 
     it(`should successfully submit after a failed attempt`, async () => {
@@ -248,6 +253,7 @@ describe('CommonFormDirective', () => {
       hasClasses($('[name=email]'), ['ng-dirty', 'ng-touched', 'ng-invalid'])
       expect(form().get('email').errors['serverError']).toEqual('That email had already been taken')
       expect(console.error).not.toHaveBeenCalled()
+      hasFocus($('[name=email]'))
     })
 
     it(`should propagate a 401 error`, async () => {
@@ -281,6 +287,7 @@ describe('CommonFormDirective', () => {
       hasClasses($('[name=password]'), ['ng-dirty', 'ng-touched', 'ng-invalid'])
       hasClasses($('[name=newsletter]'), ['ng-dirty', 'ng-touched', 'ng-invalid'])
       expect($('[name=email]')).toBeNull() // not in DOM
+      hasFocus($('[name=username]'))
     })
 
     it(`should not mark field not in DOM when submit was pressed as touched or dirty`, async () => {
@@ -295,6 +302,141 @@ describe('CommonFormDirective', () => {
       hasClasses($('[name=email]'), ['ng-pristine', 'ng-untouched', 'ng-valid'])
     })
 
+  })
+
+})
+
+describe(`Settings name properties and attributes`, () => {
+
+  @Component({
+    selector: 'custom-control',
+    template: `
+      <input type="text"
+             [value]="value"
+             (change)="value = $event.target.value"
+             [attr.name]="name"
+             [name]="name"
+      >
+    `,
+    providers: [
+      {
+        provide: NG_VALUE_ACCESSOR,
+        useExisting: forwardRef(() => CustomControlComponent),
+        multi: true,
+      },
+      {
+        provide: COMMON_FORM_CONTROL,
+        useExisting: forwardRef(() => CustomControlComponent),
+      },
+    ],
+  })
+  class CustomControlComponent implements ControlValueAccessor, CommonFormControl {
+
+    public value: string
+    @Input() public name: string
+    public log: string[] = []
+
+    setName(name: string): void {
+      this.log.push(`set name to ${name}`)
+      this.name = name
+    }
+
+    getName(): string {
+      return this.name
+    }
+
+    focus(): void {
+      this.log.push(`set focus`)
+    }
+
+    onChange = (value: string): null => null
+    onTouched = (vaule: string): null => null
+
+    writeValue(obj: any): void {
+      this.value = obj
+    }
+
+    registerOnChange(fn: any): void {
+      this.onChange = fn
+    }
+
+    registerOnTouched(fn: any): void {
+      this.onTouched = fn
+    }
+
+  }
+
+  @Component({
+    template: `
+      <form [formGroup]="form" ngxCommonForm>
+        <custom-control [formControl]="form.get('a')"></custom-control>
+        <custom-control formControlName="b"></custom-control>
+        <custom-control [formControl]="form.get('c')" name="c"></custom-control>
+
+        <input type="text" formControlName="d">
+        <input type="text" [formControl]="form.get('e')">
+        <input type="text" [formControl]="form.get('f')" name="f">
+      </form>
+    `,
+  })
+  class FormWithCustomComponent {
+    form = this.fb.group({
+      a: 'a',
+      b: 'b',
+      c: 'c',
+      d: 'd',
+      e: 'e',
+      f: 'f',
+    })
+
+    constructor(private fb: FormBuilder) {}
+  }
+
+  let fixture: ComponentFixture<FormWithCustomComponent>
+
+  const restart = () => {
+    TestBed.configureTestingModule({
+      declarations: [CustomControlComponent, FormWithCustomComponent],
+      imports: [ReactiveFormsModule, CommonFormsModule.forRoot()],
+    }).compileComponents()
+    fixture = TestBed.createComponent(FormWithCustomComponent)
+    fixture.detectChanges()
+  }
+
+  beforeEach(() => {
+    restart()
+    spyOn(console, 'error')
+  })
+
+  const $ = (css: string) => fixture.debugElement.query(By.css(css))
+  const $$ = (css: string) => fixture.debugElement.queryAll(By.css(css))
+
+  describe(`a custom component`, () => {
+    it(`should set default name if none provided`, () => {
+      expect($('input[name=a]')).toBeFalsy()
+    })
+
+    it(`should use name from formControlName`, () => {
+      expect($('input[name=b]')).not.toBeFalsy()
+    })
+
+    it(`should use name attribute`, () => {
+      expect($('input[name=c]')).not.toBeFalsy()
+    })
+  })
+
+  describe(`built-ins`, () => {
+    it(`should set default name if none provided`, () => {
+      expect($('input[name=e]')).toBeFalsy()
+    })
+
+    it(`should use name from formControlName`, () => {
+      expect($('input[name=d]')).not.toBeFalsy()
+    })
+
+    it(`should use name attribute`, () => {
+      expect($('input[name=f]')).not.toBeFalsy()
+    })
   })
 
 })

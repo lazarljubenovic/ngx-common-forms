@@ -1,7 +1,7 @@
 // tslint:disable:max-line-length
 import {ContentChildren, Directive, EventEmitter, Inject, Input, OnInit, Output, QueryList, Self} from '@angular/core'
 import {Observable} from 'rxjs/Observable'
-import {AbstractControl, FormGroup, FormGroupDirective, NgControl} from '@angular/forms'
+import {AbstractControl, FormGroup, FormGroupDirective} from '@angular/forms'
 import 'rxjs/add/observable/of'
 import 'rxjs/add/observable/throw'
 import 'rxjs/add/operator/map'
@@ -15,6 +15,7 @@ import {Subject} from 'rxjs/Subject'
 import {HttpErrorResponse} from '@angular/common/http'
 import {CommonFormConfig, CommonFormIsValidationError, CommonFormRequest, CommonFormTransform, CommonFormTransformError, FlatServerErrors} from './interfaces'
 import {COMMON_FORM_FULL_CONFIG} from './config'
+import {CommonFormControlDirective} from './common-form-control.directive'
 // tslint:enable:max-line-length
 
 export function markControlsAsDirtyAndTouched(controls: AbstractControl[]) {
@@ -38,19 +39,6 @@ export function markControlsAsDirtyAndTouchedByPath(form: FormGroup, controlName
     }
   })
 }
-
-export function markAllControlsAsDirtyAndTouched(form: FormGroup): void {
-  Object.keys(form.controls).forEach(controlName => {
-    const control = form.get(controlName)
-    if (control instanceof FormGroup) {
-      markAllControlsAsDirtyAndTouched(control)
-    } else {
-      control.markAsTouched()
-      control.markAsDirty()
-    }
-  })
-}
-
 
 @Directive({
   selector: '[ngxCommonForm]',
@@ -105,8 +93,8 @@ export class CommonFormDirective implements OnInit, CommonFormConfig {
     this.request = request
   }
 
-  @ContentChildren(NgControl)
-  public ngControls: QueryList<NgControl>
+  @ContentChildren(CommonFormControlDirective)
+  public controls: QueryList<CommonFormControlDirective>
 
   constructor(@Self() private container: FormGroupDirective,
               @Inject(COMMON_FORM_FULL_CONFIG) private config: CommonFormConfig) {
@@ -140,7 +128,10 @@ export class CommonFormDirective implements OnInit, CommonFormConfig {
         if (form.valid) {
           return true
         } else {
-          markControlsAsDirtyAndTouched(this.ngControls.toArray().map(ngCtrl => ngCtrl.control))
+          const abstractControls = this.controls.map(ctrl => ctrl.ngControl.control)
+          markControlsAsDirtyAndTouched(abstractControls)
+          const firstInvalidControl = this.controls.find(ctrl => ctrl.ngControl.invalid)
+          firstInvalidControl.commonFormControl.focus()
           return false
         }
       })
@@ -150,7 +141,10 @@ export class CommonFormDirective implements OnInit, CommonFormConfig {
         .catch((httpErrorResponse: HttpErrorResponse) => {
           if (this.isValidationError(httpErrorResponse)) {
             const flatErrors = this.transformError(httpErrorResponse)
-            this.setErrors(flatErrors)
+            const controlsWithErrors = this.setErrors(flatErrors)
+            const firstInvalidControl = this.controls
+              .find(ctrl => controlsWithErrors.indexOf(ctrl.ngControl.control) > -1)
+            firstInvalidControl.commonFormControl.focus()
           }
           if (this.propagateErrors) {
             this.ngxSubmit.emit(Observable.throw(httpErrorResponse))
@@ -169,8 +163,9 @@ export class CommonFormDirective implements OnInit, CommonFormConfig {
       })
   }
 
-  private setErrors(errors: FlatServerErrors) {
+  private setErrors(errors: FlatServerErrors): AbstractControl[] {
     const form = this.container.form as FormGroup
+
     Object.keys(errors).forEach(path => {
       const control = form.get(path)
       if (control == null) {
@@ -183,6 +178,8 @@ export class CommonFormDirective implements OnInit, CommonFormConfig {
         form.get(path).setErrors({serverError: errors[path]})
       }
     })
+
+    return Object.keys(errors).map(path => form.get(path))
   }
 
 }

@@ -2,18 +2,24 @@ import {Observable} from 'rxjs/Observable'
 import {HttpErrorResponse} from '@angular/common/http'
 
 export interface FlatServerErrors {
-  [path: string]: string;
+  [path: string]: string
 }
 
 export type CommonFormTransform = (formValue: any) => any;
 export type CommonFormIsValidationError = (response: HttpErrorResponse) => boolean
-export type CommonFormTransformError = (formValue: any) => FlatServerErrors;
-export type CommonFormRequest<T = any> = (formValue: T) => Observable<T>;
+export type CommonFormTransformError = (formValue: any) => FlatServerErrors
+export type CommonFormRequest<T = any> = (formValue: T) => Observable<T>
 
 export interface CommonFormConfig {
-  propagateErrors: boolean;
-  transform: CommonFormTransform;
-  isValidationError: CommonFormIsValidationError;
-  transformError: CommonFormTransformError;
-  request: CommonFormRequest;
+  propagateErrors: boolean
+  transform: CommonFormTransform
+  isValidationError: CommonFormIsValidationError
+  transformError: CommonFormTransformError
+  request: CommonFormRequest
+}
+
+export interface CommonFormControl {
+  setName(name: string): void
+  getName(): string
+  focus(): void
 }
