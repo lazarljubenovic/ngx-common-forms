@@ -17,6 +17,14 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "ngx-common-forms": [
+        "dist/ngx-common-forms"
+      ],
+      "ngx-common-forms/*": [
+        "dist/ngx-common-forms/*"
+      ]
+    }
   }
 }

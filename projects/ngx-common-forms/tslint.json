@@ -1,0 +1,10 @@
+{
+  "extends": "../../tslint.json",
+  "rules": {
+    "semicolon": [true, "never"],
+    "space-before-function-paren": [true],
+    "triple-equals": [false],
+    "variable-name": false,
+    "no-input-rename": false
+  }
+}
