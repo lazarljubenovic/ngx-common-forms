@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3bbbdf43-2afb-4a8a-b600-f58c07a4956c" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/ngx-common-forms/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/projects/ngx-common-forms/README.md" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -72,28 +73,33 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="FIRST">
-              <first_editor relative-caret-position="319">
-                <caret line="156" column="22" lean-forward="true" selection-end-line="187" />
+              <first_editor relative-caret-position="719">
+                <caret line="189" selection-start-line="189" selection-end-line="189" />
               </first_editor>
               <second_editor />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/projects/ngx-common-forms/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="239">
-                <caret line="163" lean-forward="true" selection-start-line="163" selection-end-line="163" />
+              <first_editor relative-caret-position="144">
+                <caret line="6" column="12" selection-end-line="189" />
               </first_editor>
               <second_editor />
             </state>
           </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tsconfig.json">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -141,10 +147,10 @@
         <option value="$PROJECT_DIR$/src/app/button.component.ts" />
         <option value="$PROJECT_DIR$/projects/ngx-common-forms/package.json" />
         <option value="$PROJECT_DIR$/tslint.json" />
-        <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/tsconfig.json" />
         <option value="$PROJECT_DIR$/projects/ngx-common-forms/README.md" />
+        <option value="$PROJECT_DIR$/README.md" />
       </list>
     </option>
   </component>
@@ -268,12 +274,12 @@
       <updated>1550476028929</updated>
       <workItem from="1550476030076" duration="11185000" />
       <workItem from="1550561547781" duration="3976000" />
-      <workItem from="1550570580239" duration="4363000" />
+      <workItem from="1550570580239" duration="4840000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="19524000" />
+    <option name="totallyTimeSpent" value="20001000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="1135" y="-2" width="2505" height="1442" extended-state="6" />
@@ -509,21 +515,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
+    <entry file="file://$PROJECT_DIR$/projects/ngx-common-forms/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="FIRST">
-          <first_editor relative-caret-position="319">
-            <caret line="156" column="22" lean-forward="true" selection-end-line="187" />
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="144">
+            <caret line="6" column="12" selection-end-line="189" />
           </first_editor>
           <second_editor />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/projects/ngx-common-forms/README.md">
+    <entry file="file://$PROJECT_DIR$/tsconfig.json">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="239">
-            <caret line="163" lean-forward="true" selection-start-line="163" selection-end-line="163" />
+        <state split_layout="FIRST">
+          <first_editor relative-caret-position="719">
+            <caret line="189" selection-start-line="189" selection-end-line="189" />
           </first_editor>
           <second_editor />
         </state>
