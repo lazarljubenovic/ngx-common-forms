@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="3bbbdf43-2afb-4a8a-b600-f58c07a4956c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/projects/ngx-common-forms/src/lib/common-form.directive.ts" beforeDir="false" afterPath="$PROJECT_DIR$/projects/ngx-common-forms/src/lib/common-form.directive.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/ngx-common-forms/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/projects/ngx-common-forms/package.json" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -90,12 +90,17 @@
       <workItem from="1550476030076" duration="11185000" />
       <workItem from="1550561547781" duration="3976000" />
       <workItem from="1550570580239" duration="4840000" />
-      <workItem from="1569568458218" duration="40000" />
+      <workItem from="1569568458218" duration="390000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
+    <option name="additionalRoots">
+      <list>
+        <option value="$PROJECT_DIR$/dist/ngx-common-forms" />
+      </list>
+    </option>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
