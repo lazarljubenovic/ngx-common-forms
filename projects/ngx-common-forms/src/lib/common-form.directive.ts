@@ -94,7 +94,7 @@ export class CommonFormDirective implements OnInit, CommonFormConfig {
    *
    * Used internally to kep track of form controls within the common form.
    */
-  @ContentChildren(CommonFormControlDirective)
+  @ContentChildren(CommonFormControlDirective, {descendants: true})
   public controls: QueryList<CommonFormControlDirective>
 
   constructor (@Self() private container: FormGroupDirective,
