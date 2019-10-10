@@ -30,14 +30,14 @@ export class FormWithSinsDirective implements AfterContentInit, OnDestroy {
 
   private destroy$ = new rx.Subject()
 
-  private className = 'ngx-sin-invalid'
+  private classNameForInvalidControl = 'ngx-sin-invalid'
 
   constructor (@Optional() @Self() private controlContainer: ControlContainer,
                private renderer: Renderer2,
                private elementRef: ElementRef) {
   }
 
-  private changeClassFor (control: AbstractControl, addClass: boolean): void {
+  private markValidityFor (control: AbstractControl, addClass: boolean): void {
     const index = this.formControlNames.toArray()
       .findIndex(formControlName => {
         return control == formControlName.control
@@ -58,19 +58,19 @@ export class FormWithSinsDirective implements AfterContentInit, OnDestroy {
     }
 
     if (addClass) {
-      this.renderer.addClass(elRef.nativeElement, this.className)
+      this.renderer.addClass(elRef.nativeElement, this.classNameForInvalidControl)
     } else {
-      this.renderer.removeClass(elRef.nativeElement, this.className)
+      this.renderer.removeClass(elRef.nativeElement, this.classNameForInvalidControl)
     }
   }
 
-  private changeClassForAll (controls: AbstractControl[], addClass: boolean): void {
-    controls.forEach(control => this.changeClassFor(control, addClass))
+  private markValidityForAll (controls: AbstractControl[], addClass: boolean): void {
+    controls.forEach(control => this.markValidityFor(control, addClass))
   }
 
-  private removeAllClasses () {
+  private markAllAsValid () {
     this.formControlElRefs.forEach(elRef => {
-      this.renderer.removeClass(elRef.nativeElement, this.className)
+      this.renderer.removeClass(elRef.nativeElement, this.classNameForInvalidControl)
     })
   }
 
@@ -104,8 +104,8 @@ export class FormWithSinsDirective implements AfterContentInit, OnDestroy {
       .subscribe((controls: AbstractControl[]) => {
         // When form controls on the page change, we grab the last info about
         // visible sins and use that. We have to be destructive here
-        this.removeAllClasses()
-        this.changeClassForAll(controls, true)
+        this.markAllAsValid()
+        this.markValidityForAll(controls, true)
       })
 
     visibleSins$.pipe(rxop.pairwise())
@@ -113,8 +113,8 @@ export class FormWithSinsDirective implements AfterContentInit, OnDestroy {
         // We can calculate diff instead of removing and setting everything.
         const added = findAdded([oldControls, newControls])
         const removed = findRemoved([oldControls, newControls])
-        this.changeClassForAll(added, true)
-        this.changeClassForAll(removed, false)
+        this.markValidityForAll(added, true)
+        this.markValidityForAll(removed, false)
       })
   }
 
