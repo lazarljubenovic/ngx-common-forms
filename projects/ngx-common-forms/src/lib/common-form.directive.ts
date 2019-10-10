@@ -57,6 +57,12 @@ export class CommonFormDirective implements OnInit, CommonFormConfig {
   @Input() public propagateErrors: boolean
 
   /**
+   * Right after the form's submit event and before ngx-common-forms does anything,
+   * this function will be run if given.
+   */
+  @Input() public preSubmit?: () => void
+
+  /**
    * Set this input to override the provided transform function.
    */
   @Input() public transform: CommonFormTransform
@@ -123,7 +129,12 @@ export class CommonFormDirective implements OnInit, CommonFormConfig {
     }
 
     this.container.ngSubmit.pipe(
-      rxop.tap((event: Event) => event.preventDefault()),
+      rxop.tap((event: Event) => {
+        event.preventDefault()
+        if (this.preSubmit != null) {
+          this.preSubmit()
+        }
+      }),
       rxop.map(() => this.container.control),
       rxop.filter(form => {
         if (form.valid) {
