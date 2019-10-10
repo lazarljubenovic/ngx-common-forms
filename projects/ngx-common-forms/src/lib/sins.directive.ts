@@ -6,7 +6,7 @@ import {AbstractControl, ControlContainer} from '@angular/forms'
 })
 export class SinsDirective implements OnInit {
 
-  @Input('sins') public name: string
+  @Input('sins') public nameOrControl: string | AbstractControl
 
   public control: AbstractControl
 
@@ -14,7 +14,9 @@ export class SinsDirective implements OnInit {
   }
 
   public ngOnInit (): void {
-    this.control = this.container.control.get(this.name)
+    this.control = typeof this.nameOrControl == 'string'
+      ? this.container.control.get(this.nameOrControl)
+      : this.nameOrControl
   }
 
 }

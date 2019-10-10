@@ -61,16 +61,16 @@ export class SinDirective implements OnInit, DoCheck, SinModuleConfig {
       this.control = this.sinsDirective.control
     } else {
       if (this.name != null) {
-        // If name is given instead of a control
+        // If nameOrControl is given instead of a control
         if (this.controlContainer == null) {
           // Name is useless if we're not inside a container such as FormGroup.
           throw new Error(`You cannot register sinName "${this.name}" outside of a control ` +
             `container. You can use the sinControl input to pass in the control directly.`)
         } else {
-          // We grab the control with such name
+          // We grab the control with such nameOrControl
           const control = this.controlContainer.control.get(this.name)
           if (control == null) {
-            // There's no control with such name, probably a typo.
+            // There's no control with such nameOrControl, probably a typo.
             throw new Error(`Cannot find control "${name}" to bind to sin.`)
           } else {
             // We use this control. It's important we trigger the setter here.
@@ -82,7 +82,7 @@ export class SinDirective implements OnInit, DoCheck, SinModuleConfig {
 
     if (isDevMode() && this.control == null) {
       // Control has not been specified directly (sinControl),
-      // cannot be determined by the given name (sinName),
+      // cannot be determined by the given nameOrControl (sinName),
       // and there is no enclosing sins.
       throw new Error(`No control specified for sin.`)
     }
