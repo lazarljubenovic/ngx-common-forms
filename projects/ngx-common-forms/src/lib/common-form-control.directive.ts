@@ -67,7 +67,7 @@ export class CommonFormControlDirective implements OnInit {
     }
 
     if (isEmpty(this.commonFormControl.getName())) {
-      const newName = this.ngControl.name || `common-form-control-name-${++uniqueId}`
+      const newName = this.ngControl.name.toString() || `common-form-control-name-${++uniqueId}`
       this.commonFormControl.setName(newName)
     }
   }

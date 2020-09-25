@@ -84,7 +84,7 @@ export const DIRECTIVES = [
   exports: DIRECTIVES,
 })
 export class CommonFormsModule {
-  public static forRoot (config?: Partial<CommonFormConfig>): ModuleWithProviders {
+  public static forRoot (config?: Partial<CommonFormConfig>): ModuleWithProviders<CommonFormsModule> {
     return {
       ngModule: CommonFormsModule,
       providers: [

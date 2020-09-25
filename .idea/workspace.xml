@@ -3,9 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="3bbbdf43-2afb-4a8a-b600-f58c07a4956c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/projects/ngx-common-forms/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/projects/ngx-common-forms/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/ngx-common-forms/src/lib/common-form-control.directive.ts" beforeDir="false" afterPath="$PROJECT_DIR$/projects/ngx-common-forms/src/lib/common-form-control.directive.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/ngx-common-forms/src/lib/common-forms.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/projects/ngx-common-forms/src/lib/common-forms.module.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/projects/ngx-common-forms/src/lib/sin.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/projects/ngx-common-forms/src/lib/sin.module.ts" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,7 +19,12 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1RPUvJU10NvzH0UUqT7aKbxzd4a" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="editor.config.ad.shown" value="true" />
     <property name="editorconfig.notification" value="&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD&#10;=======&#10;&gt;&gt;&gt;&gt;&gt;&gt;&gt; initial commit&#10;&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD&#10;=======&#10;&gt;&gt;&gt;&gt;&gt;&gt;&gt; initial commit&#10;" />
@@ -26,22 +35,24 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.sourceCode.TypeScript" />
+    <property name="settings.editor.selected.configurable" value="Errors" />
     <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
+    <property name="vue.rearranger.settings.migration" value="true" />
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
-  <component name="RunManager" selected="npm.Angular CLI Server">
+  <component name="RunManager" selected="Karma.CommonFormDirective">
+    <configuration name="CommonFormDirective" type="JavaScriptTestRunnerKarma" temporary="true" nameIsGenerated="true">
+      <config-file value="$PROJECT_DIR$/projects/ngx-common-forms/karma.conf.js" />
+      <karma-package-dir value="$PROJECT_DIR$/node_modules/@angular/cli" />
+      <working-directory value="$PROJECT_DIR$/projects/ngx-common-forms" />
+      <node-interpreter value="project" />
+      <envs />
+      <scope-kind value="SUITE" />
+      <test-file-path value="$PROJECT_DIR$/projects/ngx-common-forms/src/lib/common-form.directive.spec.ts" />
+      <test-names>
+        <test-name value="CommonFormDirective" />
+      </test-names>
+      <method v="2" />
+    </configuration>
     <configuration name="Tests (ngx-common-forms)" type="JavaScriptTestRunnerKarma">
       <config-file value="$PROJECT_DIR$/projects/ngx-common-forms/karma.conf.js" />
       <node-interpreter value="project" />
@@ -76,7 +87,13 @@
       <envs />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Karma.CommonFormDirective" />
+      </list>
+    </recent_temporary>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -91,16 +108,12 @@
       <workItem from="1550561547781" duration="3976000" />
       <workItem from="1550570580239" duration="4840000" />
       <workItem from="1569568458218" duration="390000" />
+      <workItem from="1601018066726" duration="2870000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
-    <option name="additionalRoots">
-      <list>
-        <option value="$PROJECT_DIR$/dist/ngx-common-forms" />
-      </list>
-    </option>
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -112,5 +125,52 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="3362" height="397" key="GridCell.Tab.0.bottom" timestamp="1601020861525">
+      <screen x="0" y="27" width="6000" height="1413" />
+    </state>
+    <state width="3362" height="397" key="GridCell.Tab.0.bottom/0.27.6000.1413@0.27.6000.1413" timestamp="1601020861525" />
+    <state width="3362" height="397" key="GridCell.Tab.0.center" timestamp="1601020861525">
+      <screen x="0" y="27" width="6000" height="1413" />
+    </state>
+    <state width="3362" height="397" key="GridCell.Tab.0.center/0.27.6000.1413@0.27.6000.1413" timestamp="1601020861525" />
+    <state width="3362" height="397" key="GridCell.Tab.0.left" timestamp="1601020861525">
+      <screen x="0" y="27" width="6000" height="1413" />
+    </state>
+    <state width="3362" height="397" key="GridCell.Tab.0.left/0.27.6000.1413@0.27.6000.1413" timestamp="1601020861525" />
+    <state width="3362" height="397" key="GridCell.Tab.0.right" timestamp="1601020861525">
+      <screen x="0" y="27" width="6000" height="1413" />
+    </state>
+    <state width="3362" height="397" key="GridCell.Tab.0.right/0.27.6000.1413@0.27.6000.1413" timestamp="1601020861525" />
+    <state width="3362" height="397" key="GridCell.Tab.1.bottom" timestamp="1601020861526">
+      <screen x="0" y="27" width="6000" height="1413" />
+    </state>
+    <state width="3362" height="397" key="GridCell.Tab.1.bottom/0.27.6000.1413@0.27.6000.1413" timestamp="1601020861526" />
+    <state width="3362" height="397" key="GridCell.Tab.1.center" timestamp="1601020861526">
+      <screen x="0" y="27" width="6000" height="1413" />
+    </state>
+    <state width="3362" height="397" key="GridCell.Tab.1.center/0.27.6000.1413@0.27.6000.1413" timestamp="1601020861526" />
+    <state width="3362" height="397" key="GridCell.Tab.1.left" timestamp="1601020861525">
+      <screen x="0" y="27" width="6000" height="1413" />
+    </state>
+    <state width="3362" height="397" key="GridCell.Tab.1.left/0.27.6000.1413@0.27.6000.1413" timestamp="1601020861525" />
+    <state width="3362" height="397" key="GridCell.Tab.1.right" timestamp="1601020861526">
+      <screen x="0" y="27" width="6000" height="1413" />
+    </state>
+    <state width="3362" height="397" key="GridCell.Tab.1.right/0.27.6000.1413@0.27.6000.1413" timestamp="1601020861526" />
+    <state x="3796" y="367" key="SettingsEditor" timestamp="1601020857261">
+      <screen x="0" y="27" width="6000" height="1413" />
+    </state>
+    <state x="3796" y="367" key="SettingsEditor/0.27.6000.1413@0.27.6000.1413" timestamp="1601020857261" />
+    <state x="3997" y="471" width="1529" height="797" key="find.popup" timestamp="1601020334886">
+      <screen x="0" y="27" width="6000" height="1413" />
+    </state>
+    <state x="3997" y="471" width="1529" height="797" key="find.popup/0.27.6000.1413@0.27.6000.1413" timestamp="1601020334886" />
+    <state x="3970" y="347" width="672" height="678" key="search.everywhere.popup" timestamp="1601020916610">
+      <screen x="0" y="27" width="6000" height="1413" />
+    </state>
+    <state x="3970" y="347" width="672" height="678" key="search.everywhere.popup/0.27.6000.1413@0.27.6000.1413" timestamp="1601020916610" />
   </component>
 </project>

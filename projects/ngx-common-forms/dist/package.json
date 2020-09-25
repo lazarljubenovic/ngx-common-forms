@@ -1,0 +1,20 @@
+{
+  "$schema": "../../node_modules/ng-packagr/package.schema.json",
+  "name": "ngx-common-forms",
+  "version": "0.5.0",
+  "peerDependencies": {
+    "@angular/common": "^7.2.0",
+    "@angular/core": "^7.2.0"
+  },
+  "main": "bundles/ngx-common-forms.umd.js",
+  "module": "fesm2015/ngx-common-forms.js",
+  "es2015": "fesm2015/ngx-common-forms.js",
+  "esm2015": "esm2015/ngx-common-forms.js",
+  "fesm2015": "fesm2015/ngx-common-forms.js",
+  "typings": "ngx-common-forms.d.ts",
+  "metadata": "ngx-common-forms.metadata.json",
+  "sideEffects": false,
+  "dependencies": {
+    "tslib": "^2.0.0"
+  }
+}

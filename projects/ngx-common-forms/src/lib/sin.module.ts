@@ -34,7 +34,7 @@ export const DIRECTIVES = [
   exports: DIRECTIVES,
 })
 export class SinModule {
-  public static forRoot (config?: Partial<SinModuleConfig>): ModuleWithProviders {
+  public static forRoot (config?: Partial<SinModuleConfig>): ModuleWithProviders<SinModule> {
     return {
       ngModule: SinModule,
       providers: [
